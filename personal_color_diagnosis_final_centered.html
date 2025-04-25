@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>パーソナルカラー診断</title>
+  <script>
+    function handleImageUpload(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const preview = document.getElementById('previewImage');
+        preview.src = e.target.result;
+        preview.classList.remove('hidden');
+      };
+      if (file) reader.readAsDataURL(file);
+    }
+    function triggerCamera() {
+      document.getElementById('fileInput').click();
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #E6FFFA; /* ミント背景 */
+    }
+    .mint-button {
+      background-color: #98F5E1;
+    }
+    .mint-button:hover {
+      background-color: #76EAD7;
+    }
+    .mint-title {
+      color: #3ABDA5;
+    }
+    .mint-border {
+      border-color: #98F5E1;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen px-4">
+
+  <div class="absolute top-10 text-center">
+    <h1 class="text-4xl font-bold mint-title">パーソナルカラー診断</h1>
+  </div>
+
+  <main class="flex flex-col items-center justify-center flex-grow">
+    <a href="#" onclick="triggerCamera()" class="mint-button hover:mint-button text-white text-3xl font-bold py-6 px-16 rounded-full shadow-2xl transition duration-300 transform hover:scale-105">
+      診断する
+    </a>
+    <input id="fileInput" type="file" accept="image/*" capture="environment" class="hidden" onchange="handleImageUpload(event)">
+    <img id="previewImage" class="mt-8 w-60 h-60 rounded-xl mint-border border-4 shadow-md object-cover hidden" />
+  </main>
+
+</body>
+</html>
